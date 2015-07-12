@@ -1,0 +1,21 @@
+{
+  "name": "mdast-reference-links",
+  "version": "0.0.0",
+  "description": "Transform links and images into references and definitions",
+  "license": "MIT",
+  "keywords": [
+    "link",
+    "image",
+    "to",
+    "reference",
+    "definition",
+    "mdast"
+  ],
+  "dependencies": {
+    "wooorm/mdast-util-visit": "^0.1.1"
+  },
+  "repository": "wooorm/mdast-reference-links",
+  "scripts": [
+    "index.js"
+  ]
+}

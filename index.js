@@ -1,10 +1,11 @@
 /**
  * @author Titus Wormer
- * @copyright 2015 Titus Wormer. All rights reserved.
- * @module mdast-reference-links
- * @fileoverview Plug-in to transform normal links and
- *   images into reference/definition style links and
- *   images.
+ * @copyright 2015 Titus Wormer
+ * @license MIT
+ * @module mdast:reference-links
+ * @fileoverview
+ *   Plug-in to transform normal links and images into
+ *   reference/definition style links and images.
  */
 
 'use strict';
@@ -13,14 +14,15 @@
  * Dependencies.
  */
 
-var visit = require('mdast-util-visit');
+var visit = require('unist-util-visit');
 
 /**
  * Factory to transform a normal link/image into a
  * reference and a definition, replaces the current
  * node, and stores new definitions on `definitions`.
  *
- * @param {Object.<string, Node>} definitions
+ * @param {Object.<string, Node>} definitions - Map of
+ *   identifiers to definitions.
  * @return {function(node, index, parent)}
  */
 function factory(definitions) {
@@ -74,16 +76,16 @@ function factory(definitions) {
 /**
  * Transformer.
  *
- * @param {Node} tree
+ * @param {Node} node - Node to visit.
  */
-function transformer(tree) {
+function transformer(node) {
     var definitions = {};
     var collect = factory(definitions);
-    var children = tree.children;
+    var children = node.children;
     var link;
 
-    visit(tree, 'image', collect);
-    visit(tree, 'link', collect);
+    visit(node, 'image', collect);
+    visit(node, 'link', collect);
 
     for (link in definitions) {
         children.push(definitions[link]);

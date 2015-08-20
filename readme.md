@@ -1,4 +1,4 @@
-# mdast-reference-links [![Build Status](https://img.shields.io/travis/wooorm/mdast-reference-links.svg?style=flat)](https://travis-ci.org/wooorm/mdast-reference-links) [![Coverage Status](https://img.shields.io/coveralls/wooorm/mdast-reference-links.svg?style=flat)](https://coveralls.io/r/wooorm/mdast-reference-links?branch=master)
+# mdast-reference-links [![Build Status](https://img.shields.io/travis/wooorm/mdast-reference-links.svg)](https://travis-ci.org/wooorm/mdast-reference-links) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/mdast-reference-links.svg)](https://codecov.io/github/wooorm/mdast-reference-links)
 
 [**mdast**](https://github.com/wooorm/mdast) plug-in to transform
 reference/definition style links and images into normal links and images.

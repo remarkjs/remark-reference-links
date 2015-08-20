@@ -12,7 +12,7 @@
     "mdast"
   ],
   "dependencies": {
-    "wooorm/mdast-util-visit": "^0.1.1"
+    "wooorm/unist-util-visit": "^1.0.0"
   },
   "repository": "wooorm/mdast-reference-links",
   "scripts": [

@@ -1,6 +1,6 @@
-# mdast-reference-links [![Build Status](https://img.shields.io/travis/wooorm/mdast-reference-links.svg)](https://travis-ci.org/wooorm/mdast-reference-links) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/mdast-reference-links.svg)](https://codecov.io/github/wooorm/mdast-reference-links)
+# remark-reference-links [![Build Status](https://img.shields.io/travis/wooorm/remark-reference-links.svg)](https://travis-ci.org/wooorm/remark-reference-links) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/remark-reference-links.svg)](https://codecov.io/github/wooorm/remark-reference-links)
 
-[**mdast**](https://github.com/wooorm/mdast) plug-in to transform
+[**remark**](https://github.com/wooorm/remark) plug-in to transform
 reference/definition style links and images into normal links and images.
 
 ## Installation
@@ -8,28 +8,28 @@ reference/definition style links and images into normal links and images.
 [npm](https://docs.npmjs.com/cli/install):
 
 ```bash
-npm install mdast-reference-links
+npm install remark-reference-links
 ```
 
-**mdast-reference-links** is also available for [bower](http://bower.io/#install-packages),
+**remark-reference-links** is also available for [bower](http://bower.io/#install-packages),
 [component](https://github.com/componentjs/component), and
 [duo](http://duojs.org/#getting-started), and as an AMD, CommonJS, and globals
-module, [uncompressed](mdast-reference-links.js) and
-[compressed](mdast-reference-links.min.js).
+module, [uncompressed](remark-reference-links.js) and
+[compressed](remark-reference-links.min.js).
 
 ## Usage
 
 Dependencies:
 
 ```javascript
-var mdast = require('mdast');
-var referenceLinks = require('mdast-reference-links');
+var remark = require('remark');
+var referenceLinks = require('remark-reference-links');
 ```
 
 Process:
 
 ```javascript
-var doc = mdast().use(referenceLinks).process(`[foo](http://example.com "Example Domain"), [foo](http://example.com "Example Domain"), [bar](http://example.com "Example Domain").
+var doc = remark().use(referenceLinks).process(`[foo](http://example.com "Example Domain"), [foo](http://example.com "Example Domain"), [bar](http://example.com "Example Domain").
 ![foo](http://example.com "Example Domain"), ![foo](http://example.com "Example Domain"), ![bar](http://example.com "Example Domain").
 `);
 ```
@@ -46,14 +46,14 @@ Yields:
 
 ## API
 
-### [mdast](https://github.com/wooorm/mdast#api).[use](https://github.com/wooorm/mdast#mdastuseplugin-options)(referenceLinks)
+### [remark](https://github.com/wooorm/remark#api).[use](https://github.com/wooorm/remark#remarkuseplugin-options)(referenceLinks)
 
 Transform reference/definition style links and images into normal links
 and images.
 
 ## Related
 
-*   [mdast-inline-links](https://github.com/wooorm/mdast-inline-links)
+*   [remark-inline-links](https://github.com/wooorm/remark-inline-links)
     — Reverse, thus rewriting references and definitions into normal links
     and images.
 

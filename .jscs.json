@@ -6,8 +6,8 @@
     "node_modules/",
     "build.js",
     "example.js",
-    "mdast-reference-links.js",
-    "mdast-reference-links.min.js"
+    "remark-reference-links.js",
+    "remark-reference-links.min.js"
   ],
   "jsDoc": {
     "checkAnnotations": "jsdoc3",

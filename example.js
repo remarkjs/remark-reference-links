@@ -1,9 +1,9 @@
 // Dependencies:
-var mdast = require('mdast');
+var remark = require('remark');
 var referenceLinks = require('./index.js');
 
 // Process:
-var doc = mdast().use(referenceLinks).process(`[foo](http://example.com "Example Domain"), [foo](http://example.com "Example Domain"), [bar](http://example.com "Example Domain").
+var doc = remark().use(referenceLinks).process(`[foo](http://example.com "Example Domain"), [foo](http://example.com "Example Domain"), [bar](http://example.com "Example Domain").
 
 ![foo](http://example.com "Example Domain"), ![foo](http://example.com "Example Domain"), ![bar](http://example.com "Example Domain").
 `);

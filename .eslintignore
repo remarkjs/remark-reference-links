@@ -2,6 +2,6 @@ build/
 components/
 coverage/
 build.js
-mdast-reference-links.js
-mdast-reference-links.min.js
+remark-reference-links.js
+remark-reference-links.min.js
 example.js

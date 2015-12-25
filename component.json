@@ -1,5 +1,5 @@
 {
-  "name": "mdast-reference-links",
+  "name": "remark-reference-links",
   "version": "1.0.0",
   "description": "Transform links and images into references and definitions",
   "license": "MIT",
@@ -9,12 +9,12 @@
     "to",
     "reference",
     "definition",
-    "mdast"
+    "remark"
   ],
   "dependencies": {
     "wooorm/unist-util-visit": "^1.0.0"
   },
-  "repository": "wooorm/mdast-reference-links",
+  "repository": "wooorm/remark-reference-links",
   "scripts": [
     "index.js"
   ]

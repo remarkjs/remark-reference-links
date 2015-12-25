@@ -1,5 +1,5 @@
 {
-  "name": "mdast-reference-links",
+  "name": "remark-reference-links",
   "version": "1.0.0",
   "description": "Transform links and images into references and definitions",
   "license": "MIT",
@@ -9,12 +9,12 @@
     "to",
     "reference",
     "definition",
-    "mdast"
+    "remark"
   ],
   "dependencies": {
     "unist-util-visit": "^1.0.0"
   },
-  "repository": "wooorm/mdast-reference-links",
+  "repository": "wooorm/remark-reference-links",
   "author": "Titus Wormer <tituswormer@gmail.com>",
   "files": [
     "index.js"
@@ -26,13 +26,13 @@
     "istanbul": "^0.3.0",
     "jscs": "^2.0.0",
     "jscs-jsdoc": "^1.0.0",
-    "mdast": "^1.0.0",
-    "mdast-comment-config": "^1.0.0",
-    "mdast-github": "^1.0.0",
-    "mdast-lint": "^1.0.0",
-    "mdast-slug": "^1.0.0",
-    "mdast-usage": "^1.0.0",
-    "mdast-validate-links": "^0.3.0",
+    "remark": "^3.0.0",
+    "remark-comment-config": "^2.0.0",
+    "remark-github": "^2.0.0",
+    "remark-lint": "^2.0.0",
+    "remark-slug": "^3.0.0",
+    "remark-usage": "^2.0.0",
+    "remark-validate-links": "^2.0.0",
     "mocha": "^2.0.0"
   },
   "scripts": {
@@ -44,9 +44,9 @@
     "lint-style": "jscs --reporter inline .",
     "lint": "npm run lint-api && npm run lint-style",
     "make": "npm run lint && npm run test-coverage",
-    "bundle": "browserify index.js --no-builtins -s mdastReferenceLinks > mdast-reference-links.js",
-    "postbundle": "esmangle mdast-reference-links.js > mdast-reference-links.min.js",
-    "build-md": "mdast . --quiet",
+    "bundle": "browserify index.js --no-builtins -s remarkReferenceLinks > remark-reference-links.js",
+    "postbundle": "esmangle remark-reference-links.js > remark-reference-links.min.js",
+    "build-md": "remark . --quiet",
     "build": "npm run bundle && npm run build-md"
   }
 }

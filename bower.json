@@ -1,6 +1,6 @@
 {
-  "name": "mdast-reference-links",
-  "main": "mdast-reference-links.js",
+  "name": "remark-reference-links",
+  "main": "remark-reference-links.js",
   "description": "Transform links and images into references and definitions",
   "license": "MIT",
   "keywords": [
@@ -9,11 +9,11 @@
     "to",
     "reference",
     "definition",
-    "mdast"
+    "remark"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wooorm/mdast-reference-links.git"
+    "url": "https://github.com/wooorm/remark-reference-links.git"
   },
   "authors": [
     "Titus Wormer <tituswormer@gmail.com>"

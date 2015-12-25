@@ -2,7 +2,7 @@
  * @author Titus Wormer
  * @copyright 2015 Titus Wormer
  * @license MIT
- * @module mdast:reference-links
+ * @module remark:reference-links
  * @fileoverview
  *   Plug-in to transform normal links and images into
  *   reference/definition style links and images.

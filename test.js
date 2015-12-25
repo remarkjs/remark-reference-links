@@ -2,8 +2,8 @@
  * @author Titus Wormer
  * @copyright 2015 Titus Wormer
  * @license MIT
- * @module mdast:reference-links:test
- * @fileoverview Test suite for mdast-reference-links.
+ * @module remark:reference-links:test
+ * @fileoverview Test suite for remark-reference-links.
  */
 
 'use strict';
@@ -15,16 +15,16 @@
  */
 
 var assert = require('assert');
-var mdast = require('mdast');
+var remark = require('remark');
 var referenceLinks = require('./index.js');
 
 /*
  * Tests.
  */
 
-describe('mdast-reference-links', function () {
+describe('remark-reference-links', function () {
     it('should work', function (done) {
-        mdast.use(referenceLinks).process([
+        remark.use(referenceLinks).process([
             '[foo](http://example.com "Example Domain"), ' +
                 '[foo](http://example.com "Example Domain"), ' +
                 '[bar](http://example.com "Example Domain").',

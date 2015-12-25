@@ -11,7 +11,7 @@ reference/definition style links and images into normal links and images.
 npm install remark-reference-links
 ```
 
-**remark-reference-links** is also available for [bower](http://bower.io/#install-packages),
+**remark-reference-links** is also available for
 [component](https://github.com/componentjs/component), and
 [duo](http://duojs.org/#getting-started), and as an AMD, CommonJS, and globals
 module, [uncompressed](remark-reference-links.js) and

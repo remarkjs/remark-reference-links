@@ -13,7 +13,7 @@ deploy:
   api_key:
     secure: V5hL0Z+77vBfBPtUdIBiM73cRYZLXRc6WYQzrzqVzGbk7eQnv5idArueQtm8rFTakciq4bewsS4q8R660aHKMN+t2SSgMat8GTfLkzP6I65QWjxRmBuAcU9L9/Jg6zCnfh4TKpiwLAxNcs3Lv8tZln13a/3jZOu1L9r22Hpvx74grCnTpyYeBUxFa2xu2cyizW4nMQakKE3P0LaUkMz1Tv6udNrHEio/d3IyzuNvdbPenUp/isKNAPQFLdD+98on2ss2+4aOYGRCSnkOjy7jeZrj08K9NI6E85W0JJdYif3Hn0/dBlUPL0mH+TjFRVsWM2Kq3DaCtiumQtD+h33gPQyvgEiFZZVGKi8eJrhN2gSsCVY/+ZYQfMXQoXIcP6OUMXxwLXj2UM863hwcsyRKmlIIox5UxDKZc9oaHi10LedNuWirXr0rcTqpMws8nqzr7LRDbyxm/U7aU6hJuuXkl+6I5xxKitjwzt6jdD0z2C20jZSCSeK6Qmi5ZXRiVZ2OuA9S97wZd2+panyleqyerP754a1i4/aKgpehzVH1WJfcONcCQ7H2zvrTQtJ64g/gvzitMHKEVkYe5TypJbqPXWFnfHxxk71s4TxwCjfVCuLygsz7Rj3BazPo6oFCmWUFnLIlQT7hi+N9j9Bsz/MnbiothXJgqOHpHK0A877ZRBg=
   file:
-    - "remark-inline-links.js"
-    - "remark-inline-links.min.js"
+    - "remark-reference-links.js"
+    - "remark-reference-links.min.js"
   on:
     tags: true

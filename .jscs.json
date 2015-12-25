@@ -1,10 +1,8 @@
 {
   "excludeFiles": [
-    "build/",
     "components/",
     "coverage/",
     "node_modules/",
-    "build.js",
     "example.js",
     "remark-reference-links.js",
     "remark-reference-links.min.js"

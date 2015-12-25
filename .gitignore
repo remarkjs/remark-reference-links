@@ -5,3 +5,5 @@ components/
 coverage/
 node_modules/
 build.js
+remark-reference-links.js
+remark-reference-links.min.js

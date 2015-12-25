@@ -2,6 +2,11 @@
 
 <!--lint disable no-multiple-toplevel-headings-->
 
+2.0.1 / 2015-12-25
+==================
+
+*   Fix travis deploy ([55cc034](https://github.com/wooorm/remark-reference-links/commit/55cc034))
+
 2.0.0 / 2015-12-25
 ==================
 

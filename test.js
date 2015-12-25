@@ -8,13 +8,13 @@
 
 'use strict';
 
-/* eslint-env mocha */
+/* eslint-env node */
 
 /*
  * Dependencies.
  */
 
-var assert = require('assert');
+var test = require('tape');
 var remark = require('remark');
 var referenceLinks = require('./index.js');
 
@@ -22,28 +22,28 @@ var referenceLinks = require('./index.js');
  * Tests.
  */
 
-describe('remark-reference-links', function () {
-    it('should work', function (done) {
-        remark.use(referenceLinks).process([
+test('remark-reference-links', function (t) {
+    remark.use(referenceLinks).process([
+        '[foo](http://example.com "Example Domain"), ' +
             '[foo](http://example.com "Example Domain"), ' +
-                '[foo](http://example.com "Example Domain"), ' +
-                '[bar](http://example.com "Example Domain").',
-            '',
+            '[bar](http://example.com "Example Domain").',
+        '',
+        '![foo](http://example.com "Example Domain"), ' +
             '![foo](http://example.com "Example Domain"), ' +
-                '![foo](http://example.com "Example Domain"), ' +
-                '![bar](http://example.com "Example Domain").',
-            ''
-        ].join('\n'), function (err, file, doc) {
-            done(err);
+            '![bar](http://example.com "Example Domain").',
+        ''
+    ].join('\n'), function (err, file, doc) {
+        t.ifErr(err);
 
-            assert.equal(doc, [
-                '[foo][1], [foo][1], [bar][1].',
-                '',
-                '![foo][1], ![foo][1], ![bar][1].',
-                '',
-                '[1]: http://example.com "Example Domain"',
-                ''
-            ].join('\n'));
-        });
+        t.equal(doc, [
+            '[foo][1], [foo][1], [bar][1].',
+            '',
+            '![foo][1], ![foo][1], ![bar][1].',
+            '',
+            '[1]: http://example.com "Example Domain"',
+            ''
+        ].join('\n'));
+
+        t.end();
     });
 });

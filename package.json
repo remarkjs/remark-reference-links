@@ -36,7 +36,7 @@
     "tape": "^4.0.0"
   },
   "scripts": {
-    "build-md": "remark . --quiet",
+    "build-md": "remark . --quiet --frail",
     "build-bundle": "browserify index.js --no-builtins -s remarkReferenceLinks > remark-reference-links.js",
     "build-mangle": "esmangle remark-reference-links.js > remark-reference-links.min.js",
     "build": "npm run build-md && npm run build-bundle && npm run build-mangle",

@@ -10,6 +10,8 @@
 
 'use strict';
 
+/* eslint-env commonjs */
+
 /*
  * Dependencies.
  */
@@ -23,7 +25,7 @@ var visit = require('unist-util-visit');
  *
  * @param {Object.<string, Node>} definitions - Map of
  *   identifiers to definitions.
- * @return {function(node, index, parent)}
+ * @return {Function} - Collector.
  */
 function factory(definitions) {
     var id = 0;
@@ -95,7 +97,7 @@ function transformer(node) {
 /**
  * Attacher.
  *
- * @return {function(node)}
+ * @return {Function} - transformer.
  */
 function attacher() {
     return transformer;

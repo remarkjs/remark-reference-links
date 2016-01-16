@@ -8,7 +8,7 @@ var doc = remark().use(referenceLinks).process([
     '',
     '![foo](http://example.com "Example Domain"), ![foo](http://example.com "Example Domain"), ![bar](http://example.com "Example Domain").',
     ''
-]);
+].join('\n'));
 
 // Yields:
 console.log('md', doc);

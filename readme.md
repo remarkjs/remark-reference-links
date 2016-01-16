@@ -33,10 +33,18 @@ var doc = remark().use(referenceLinks).process([
     '',
     '![foo](http://example.com "Example Domain"), ![foo](http://example.com "Example Domain"), ![bar](http://example.com "Example Domain").',
     ''
-]);
+].join('\n'));
 ```
 
 Yields:
+
+```md
+[foo][1], [foo][1], [bar][1].
+
+![foo][1], ![foo][1], ![bar][1].
+
+[1]: http://example.com "Example Domain"
+```
 
 ## API
 

@@ -14,8 +14,9 @@
   "dependencies": {
     "unist-util-visit": "^1.0.0"
   },
-  "repository": "wooorm/remark-reference-links",
-  "author": "Titus Wormer <tituswormer@gmail.com>",
+  "repository": "https://github.com/wooorm/remark-reference-links.git",
+  "bugs": "https://github.com/wooorm/remark-reference-links/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "files": [
     "index.js"
   ],

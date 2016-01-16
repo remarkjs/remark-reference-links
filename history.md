@@ -2,6 +2,13 @@
 
 <!--lint disable no-multiple-toplevel-headings-->
 
+2.0.2 / 2016-01-16
+==================
+
+*   Refactor metadata in `package.json` ([`de51de3`](https://github.com/wooorm/remark-reference-links/commit/de51de3))
+*   Update dev-dependencies ([`09a6fd9`](https://github.com/wooorm/remark-reference-links/commit/09a6fd9))
+*   Fix example ([`8c539a5`](https://github.com/wooorm/remark-reference-links/commit/8c539a5))
+
 2.0.1 / 2015-12-25
 ==================
 

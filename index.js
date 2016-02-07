@@ -40,6 +40,10 @@ function factory(definitions) {
      * @param {Node} parent - Parent of `node`.
      */
     function item(node, index, parent) {
+        if (node.type !== 'image' && node.type !== 'link') {
+            return;
+        }
+
         var link = node.src || node.href;
         var replacement;
         var identifier;
@@ -86,8 +90,7 @@ function transformer(node) {
     var children = node.children;
     var link;
 
-    visit(node, 'image', collect);
-    visit(node, 'link', collect);
+    visit(node, collect);
 
     for (link in definitions) {
         children.push(definitions[link]);

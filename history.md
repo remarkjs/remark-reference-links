@@ -2,6 +2,13 @@
 
 <!--lint disable no-multiple-toplevel-headings-->
 
+3.0.0 / 2016-02-14
+==================
+
+*   Remove support for Duo ([`6ddd273`](https://github.com/wooorm/remark-reference-links/commit/6ddd273))
+*   Update for changes in remark@4.0.0 ([`6f26286`](https://github.com/wooorm/remark-reference-links/commit/6f26286))
+*   Fix identifiers by numbering in order of appearance ([`9d01ef2`](https://github.com/wooorm/remark-reference-links/commit/9d01ef2))
+
 2.0.2 / 2016-01-16
 ==================
 

@@ -17,6 +17,10 @@
   "repository": "https://github.com/wooorm/remark-reference-links.git",
   "bugs": "https://github.com/wooorm/remark-reference-links/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+    "An Ko <an@cyan.io>"
+  ],
   "files": [
     "index.js"
   ],

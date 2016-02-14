@@ -40,13 +40,13 @@ function factory(definitions) {
      * @param {Node} parent - Parent of `node`.
      */
     function item(node, index, parent) {
+        var link = node.url;
+        var replacement;
+        var identifier;
+
         if (node.type !== 'image' && node.type !== 'link') {
             return;
         }
-
-        var link = node.src || node.href;
-        var replacement;
-        var identifier;
 
         if (!definitions[link]) {
             identifier = String(++id);
@@ -55,14 +55,14 @@ function factory(definitions) {
                 'type': 'definition',
                 'identifier': identifier,
                 'title': node.title,
-                'link': link
+                'url': link
             };
         } else {
             identifier = definitions[link].identifier;
         }
 
         replacement = {
-            'type': (node.type === 'image' ? 'image' : 'link') + 'Reference',
+            'type': node.type + 'Reference',
             'identifier': id,
             'referenceType': 'full'
         };

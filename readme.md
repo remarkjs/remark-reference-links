@@ -1,18 +1,18 @@
-# remark-reference-links [![Build Status](https://img.shields.io/travis/wooorm/remark-reference-links.svg)](https://travis-ci.org/wooorm/remark-reference-links) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/remark-reference-links.svg)](https://codecov.io/github/wooorm/remark-reference-links)
+# remark-reference-links [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
 
-[**remark**](https://github.com/wooorm/remark) plug-in to transform
-reference/definition style links and images into normal links and images.
+[**remark**][remark] plug-in to transform links and images into
+references and definitions
 
 ## Installation
 
-[npm](https://docs.npmjs.com/cli/install):
+[npm][npm-install]:
 
 ```bash
 npm install remark-reference-links
 ```
 
 **remark-reference-links** is also available as an AMD, CommonJS, and
-globals module, [uncompressed and compressed](https://github.com/wooorm/remark-reference-links/releases).
+globals module, [uncompressed and compressed][releases].
 
 ## Usage
 
@@ -46,17 +46,41 @@ Yields:
 
 ## API
 
-### [remark](https://github.com/wooorm/remark#api).[use](https://github.com/wooorm/remark#remarkuseplugin-options)(referenceLinks)
+### `remark.use(referenceLinks)`
 
-Transform reference/definition style links and images into normal links
-and images.
+links and images into references and definitions
 
 ## Related
 
-*   [remark-inline-links](https://github.com/wooorm/remark-inline-links)
+*   [`eush77/remark-defsplit`](https://github.com/eush77/remark-defsplit)
     — Reverse, thus rewriting references and definitions into normal links
-    and images.
+      and images, but with URI-based identifiers instead of
+      numerical ones;
+
+*   [`wooorm/remark-reference-links`](https://github.com/wooorm/remark-reference-links)
+    — Reverse, thus rewriting references and definitions into normal links
+      and images.
 
 ## License
 
-[MIT](LICENSE) © [Titus Wormer](http://wooorm.com)
+[MIT][license] © [Titus Wormer][author]
+
+<!-- Definitions -->
+
+[travis-badge]: https://img.shields.io/travis/wooorm/remark-reference-links/master.svg
+
+[travis]: https://travis-ci.org/wooorm/remark-reference-links
+
+[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/remark-reference-links.svg
+
+[codecov]: https://codecov.io/github/wooorm/remark-reference-links
+
+[npm-install]: https://docs.npmjs.com/cli/install
+
+[releases]: https://github.com/wooorm/remark-reference-links/releases
+
+[license]: LICENSE
+
+[author]: http://wooorm.com
+
+[remark]: https://github.com/wooorm/remark

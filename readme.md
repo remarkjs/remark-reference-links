@@ -1,11 +1,13 @@
-# remark-reference-links [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+# remark-reference-links [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status] [![Chat][chat-badge]][chat]
+
+<!--lint disable list-item-spacing-->
 
 [**remark**][remark] plug-in to transform links and images into
-references and definitions
+references and definitions.
 
 ## Installation
 
-[npm][npm-install]:
+[npm][]:
 
 ```bash
 npm install remark-reference-links
@@ -48,18 +50,17 @@ Yields:
 
 ### `remark.use(referenceLinks)`
 
-links and images into references and definitions
+Transform links and images into references and definitions.
 
 ## Related
 
+*   [`wooorm/remark-inline-links`](https://github.com/wooorm/remark-inline-links)
+    — Reverse, thus rewriting references and definitions into normal links
+      and images;
 *   [`eush77/remark-defsplit`](https://github.com/eush77/remark-defsplit)
     — Reverse, thus rewriting references and definitions into normal links
       and images, but with URI-based identifiers instead of
-      numerical ones;
-
-*   [`wooorm/remark-reference-links`](https://github.com/wooorm/remark-reference-links)
-    — Reverse, thus rewriting references and definitions into normal links
-      and images.
+      numerical ones.
 
 ## License
 
@@ -67,20 +68,24 @@ links and images into references and definitions
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/remark-reference-links/master.svg
+[build-badge]: https://img.shields.io/travis/wooorm/remark-reference-links.svg
 
-[travis]: https://travis-ci.org/wooorm/remark-reference-links
+[build-status]: https://travis-ci.org/wooorm/remark-reference-links
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/remark-reference-links.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/remark-reference-links.svg
 
-[codecov]: https://codecov.io/github/wooorm/remark-reference-links
+[coverage-status]: https://codecov.io/github/wooorm/remark-reference-links
 
-[npm-install]: https://docs.npmjs.com/cli/install
+[chat-badge]: https://img.shields.io/gitter/room/wooorm/remark.svg
+
+[chat]: https://gitter.im/wooorm/remark
 
 [releases]: https://github.com/wooorm/remark-reference-links/releases
 
 [license]: LICENSE
 
 [author]: http://wooorm.com
+
+[npm]: https://docs.npmjs.com/cli/install
 
 [remark]: https://github.com/wooorm/remark

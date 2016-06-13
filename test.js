@@ -23,7 +23,7 @@ var referenceLinks = require('./index.js');
  */
 
 test('remark-reference-links', function (t) {
-    remark.use(referenceLinks).process([
+    remark().use(referenceLinks).process([
         '[foo](http://example.com "Example Domain"), ' +
             '[foo](http://example.com "Example Domain"), ' +
             '[bar](http://example.com "Example Domain").',
@@ -32,10 +32,10 @@ test('remark-reference-links', function (t) {
             '![foo](http://example.com "Example Domain"), ' +
             '![bar](http://example.com "Example Domain").',
         ''
-    ].join('\n'), function (err, file, doc) {
+    ].join('\n'), function (err, file) {
         t.ifErr(err);
 
-        t.equal(doc, [
+        t.equal(String(file), [
             '[foo][1], [foo][1], [bar][1].',
             '',
             '![foo][1], ![foo][1], ![bar][1].',
@@ -49,14 +49,14 @@ test('remark-reference-links', function (t) {
 });
 
 test('reference links are numbered in order they\'re seen', function (t) {
-    remark.use(referenceLinks).process([
+    remark().use(referenceLinks).process([
         '[foo](http://example.com/1 "Example Domain 1") ' +
           '![foo](http://example.com/2 "Example Domain 2")',
         ''
-    ].join('\n'), function (err, file, doc) {
+    ].join('\n'), function (err, file) {
         t.ifErr(err);
 
-        t.equal(doc, [
+        t.equal(String(file), [
             '[foo][1] ![foo][2]',
             '',
             '[1]: http://example.com/1 "Example Domain 1"',

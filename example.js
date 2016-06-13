@@ -3,7 +3,7 @@ var remark = require('remark');
 var referenceLinks = require('./index.js');
 
 // Process:
-var doc = remark().use(referenceLinks).process([
+var file = remark().use(referenceLinks).process([
     '[foo](http://example.com "Example Domain"), [foo](http://example.com "Example Domain"), [bar](http://example.com "Example Domain").',
     '',
     '![foo](http://example.com "Example Domain"), ![foo](http://example.com "Example Domain"), ![bar](http://example.com "Example Domain").',
@@ -11,4 +11,4 @@ var doc = remark().use(referenceLinks).process([
 ].join('\n'));
 
 // Yields:
-console.log('md', doc);
+console.log('md', String(file));

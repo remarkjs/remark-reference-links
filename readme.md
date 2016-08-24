@@ -1,7 +1,5 @@
 # remark-reference-links [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status] [![Chat][chat-badge]][chat]
 
-<!--lint disable list-item-spacing-->
-
 [**remark**][remark] plug-in to transform links and images into
 references and definitions.
 
@@ -12,9 +10,6 @@ references and definitions.
 ```bash
 npm install remark-reference-links
 ```
-
-**remark-reference-links** is also available as an AMD, CommonJS, and
-globals module, [uncompressed and compressed][releases].
 
 ## Usage
 
@@ -29,10 +24,10 @@ Process:
 
 ```javascript
 var file = remark().use(referenceLinks).process([
-    '[foo](http://example.com "Example Domain"), [foo](http://example.com "Example Domain"), [bar](http://example.com "Example Domain").',
-    '',
-    '![foo](http://example.com "Example Domain"), ![foo](http://example.com "Example Domain"), ![bar](http://example.com "Example Domain").',
-    ''
+  '[foo](http://example.com "Example Domain"), [foo](http://example.com "Example Domain"), [bar](http://example.com "Example Domain").',
+  '',
+  '![foo](http://example.com "Example Domain"), ![foo](http://example.com "Example Domain"), ![bar](http://example.com "Example Domain").',
+  ''
 ].join('\n'));
 ```
 
@@ -79,8 +74,6 @@ Transform links and images into references and definitions.
 [chat-badge]: https://img.shields.io/gitter/room/wooorm/remark.svg
 
 [chat]: https://gitter.im/wooorm/remark
-
-[releases]: https://github.com/wooorm/remark-reference-links/releases
 
 [license]: LICENSE
 

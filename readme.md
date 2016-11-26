@@ -13,22 +13,18 @@ npm install remark-reference-links
 
 ## Usage
 
-Dependencies:
-
 ```javascript
 var remark = require('remark');
 var referenceLinks = require('remark-reference-links');
-```
 
-Process:
-
-```javascript
 var file = remark().use(referenceLinks).process([
   '[foo](http://example.com "Example Domain"), [foo](http://example.com "Example Domain"), [bar](http://example.com "Example Domain").',
   '',
   '![foo](http://example.com "Example Domain"), ![foo](http://example.com "Example Domain"), ![bar](http://example.com "Example Domain").',
   ''
 ].join('\n'));
+
+console.log(String(file));
 ```
 
 Yields:

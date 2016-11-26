@@ -1,27 +1,13 @@
-/**
- * @author Titus Wormer
- * @copyright 2015 Titus Wormer
- * @license MIT
- * @module remark:reference-links
- * @fileoverview
- *   Plug-in to transform normal links and images into
- *   reference/definition style links and images.
- */
-
 'use strict';
 
-/* Dependencies. */
 var visit = require('unist-util-visit');
 
-/* Expose. */
 module.exports = attacher;
 
-/* Attacher. */
 function attacher() {
   return transformer;
 }
 
-/* Transformer. */
 function transformer(node) {
   var definitions = {};
   var collect = factory(definitions);

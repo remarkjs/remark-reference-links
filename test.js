@@ -1,19 +1,9 @@
-/**
- * @author Titus Wormer
- * @copyright 2015 Titus Wormer
- * @license MIT
- * @module remark:reference-links:test
- * @fileoverview Test suite for remark-reference-links.
- */
-
 'use strict';
 
-/* Dependencies. */
 var test = require('tape');
 var remark = require('remark');
 var referenceLinks = require('./index.js');
 
-/* Tests. */
 test('remark-reference-links', function (t) {
   remark().use(referenceLinks).process([
     '[foo](http://example.com "Example Domain"), ' +

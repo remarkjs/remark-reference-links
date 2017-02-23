@@ -2,9 +2,9 @@
 
 var visit = require('unist-util-visit');
 
-module.exports = attacher;
+module.exports = referenceLinks;
 
-function attacher() {
+function referenceLinks() {
   return transformer;
 }
 

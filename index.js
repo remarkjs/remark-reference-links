@@ -10,10 +10,12 @@ function referenceLinks() {
 
 function transformer(node) {
   var definitions = {};
-  var collect = factory(definitions);
+  var existing = [];
+  var collect = factory(definitions, existing);
   var children = node.children;
   var link;
 
+  visit(node, 'definition', find(existing));
   visit(node, collect);
 
   for (link in definitions) {
@@ -21,10 +23,18 @@ function transformer(node) {
   }
 }
 
+function find(existing) {
+  return one;
+
+  function one(node) {
+    existing.push(node.identifier);
+  }
+}
+
 /* Factory to transform a normal link/image into a
  * reference and a definition, replaces the current
  * node, and stores new definitions on `definitions`. */
-function factory(definitions) {
+function factory(definitions, existing) {
   var id = 0;
 
   return one;
@@ -36,6 +46,11 @@ function factory(definitions) {
     var replacement;
     var identifier;
 
+    if (node.type === 'definition') {
+      existing.push(node.identifier);
+      return;
+    }
+
     if (node.type !== 'image' && node.type !== 'link') {
       return;
     }
@@ -43,7 +58,9 @@ function factory(definitions) {
     if (definitions[link]) {
       identifier = definitions[link].identifier;
     } else {
-      identifier = String(++id);
+      do {
+        identifier = String(++id);
+      } while (existing.indexOf(identifier) !== -1);
 
       definitions[link] = {
         type: 'definition',

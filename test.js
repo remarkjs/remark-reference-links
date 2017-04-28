@@ -50,3 +50,37 @@ test('reference links are numbered in order they\'re seen', function (t) {
     t.end();
   });
 });
+
+test('reference links don’t coalesce with existing identifiers', function (t) {
+  remark().use(referenceLinks).process([
+    '# Hello!',
+    '',
+    'This is a [thing][1] and [that](bravo.com) is a [thing][3]',
+    'and [stuff](delta.com)',
+    '',
+    '[1]: alpha.com',
+    '',
+    '[3]: charlie.com',
+    ''
+  ].join('\n'), function (err, file) {
+    t.ifErr(err);
+
+    t.equal(String(file), [
+      '# Hello!',
+      '',
+      'This is a [thing][1] and [that][2] is a [thing][3]',
+      'and [stuff][4]',
+      '',
+      '[1]: alpha.com',
+      '',
+      '[3]: charlie.com',
+      '',
+      '[2]: bravo.com',
+      '',
+      '[4]: delta.com',
+      ''
+    ].join('\n'));
+
+    t.end();
+  });
+});

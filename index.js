@@ -46,11 +46,6 @@ function factory(definitions, existing) {
     var replacement;
     var identifier;
 
-    if (node.type === 'definition') {
-      existing.push(node.identifier);
-      return;
-    }
-
     if (node.type !== 'image' && node.type !== 'link') {
       return;
     }

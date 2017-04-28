@@ -1,5 +1,6 @@
 'use strict';
 
+var has = require('has');
 var visit = require('unist-util-visit');
 
 module.exports = referenceLinks;
@@ -13,13 +14,18 @@ function transformer(node) {
   var existing = [];
   var collect = factory(definitions, existing);
   var children = node.children;
-  var link;
+  var url;
+  var title;
+  var titles;
 
   visit(node, 'definition', find(existing));
   visit(node, collect);
 
-  for (link in definitions) {
-    children.push(definitions[link]);
+  for (url in definitions) {
+    titles = definitions[url];
+    for (title in titles) {
+      children.push(titles[title]);
+    }
   }
 }
 
@@ -42,26 +48,35 @@ function factory(definitions, existing) {
   /* Transform a normal link/image based on bound
    * `definitions`. */
   function one(node, index, parent) {
-    var link = node.url;
+    var url = node.url;
+    var title = node.title;
     var replacement;
     var identifier;
+    var titles;
 
     if (node.type !== 'image' && node.type !== 'link') {
       return;
     }
 
-    if (definitions[link]) {
-      identifier = definitions[link].identifier;
+    if (has(definitions, url)) {
+      titles = definitions[url];
+    } else {
+      titles = {};
+      definitions[url] = titles;
+    }
+
+    if (has(titles, title)) {
+      identifier = titles[title].identifier;
     } else {
       do {
         identifier = String(++id);
       } while (existing.indexOf(identifier) !== -1);
 
-      definitions[link] = {
+      titles[title] = {
         type: 'definition',
         identifier: identifier,
-        title: node.title,
-        url: link
+        title: title,
+        url: url
       };
     }
 

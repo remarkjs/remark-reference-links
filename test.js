@@ -84,3 +84,27 @@ test('reference links don’t coalesce with existing identifiers', function (t) 
     t.end();
   });
 });
+
+test('should support same URLs with different titles', function (t) {
+  remark().use(referenceLinks).process([
+    '[This](alpha.com "alpha").',
+    '',
+    '[That](alpha.com "bravo").',
+    ''
+  ].join('\n'), function (err, file) {
+    t.ifErr(err);
+
+    t.equal(String(file), [
+      '[This][1].',
+      '',
+      '[That][2].',
+      '',
+      '[1]: alpha.com "alpha"',
+      '',
+      '[2]: alpha.com "bravo"',
+      ''
+    ].join('\n'));
+
+    t.end();
+  });
+});

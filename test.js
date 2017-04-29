@@ -108,3 +108,39 @@ test('should support same URLs with different titles', function (t) {
     t.end();
   });
 });
+
+test('should use existing definitions if they exist', function (t) {
+  remark().use(referenceLinks).process([
+    '[This](alpha.com "alpha").',
+    '',
+    '[That](alpha.com).',
+    '',
+    '[Thut](bravo.com "charlie").',
+    '',
+    '[this]: alpha.com "alpha"',
+    '',
+    '[thut]: bravo.com "delta"',
+    ''
+  ].join('\n'), function (err, file) {
+    t.ifErr(err);
+
+    t.equal(String(file), [
+      '[This][this].',
+      '',
+      '[That][1].',
+      '',
+      '[Thut][2].',
+      '',
+      '[this]: alpha.com "alpha"',
+      '',
+      '[thut]: bravo.com "delta"',
+      '',
+      '[1]: alpha.com',
+      '',
+      '[2]: bravo.com "charlie"',
+      ''
+    ].join('\n'));
+
+    t.end();
+  });
+});

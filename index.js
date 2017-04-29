@@ -12,35 +12,31 @@ function referenceLinks() {
 function transformer(node) {
   var definitions = {};
   var existing = [];
-  var collect = factory(definitions, existing);
-  var children = node.children;
-  var url;
-  var title;
-  var titles;
 
-  visit(node, 'definition', find(existing));
-  visit(node, collect);
-
-  for (url in definitions) {
-    titles = definitions[url];
-    for (title in titles) {
-      children.push(titles[title]);
-    }
-  }
+  visit(node, 'definition', find(definitions, existing));
+  visit(node, factory(node, definitions, existing));
 }
 
-function find(existing) {
+/* Find existing definitions. */
+function find(definitions, existing) {
   return one;
 
   function one(node) {
+    var url = node.url;
+
     existing.push(node.identifier);
+
+    if (!has(definitions, url)) {
+      definitions[url] = {};
+    }
+
+    definitions[url][node.title] = node;
   }
 }
 
-/* Factory to transform a normal link/image into a
- * reference and a definition, replaces the current
- * node, and stores new definitions on `definitions`. */
-function factory(definitions, existing) {
+/* Transform normal links and images into references and definitions,
+ * replaces the current node, and adds a definition if needed. */
+function factory(root, definitions, existing) {
   var id = 0;
 
   return one;
@@ -53,6 +49,7 @@ function factory(definitions, existing) {
     var replacement;
     var identifier;
     var titles;
+    var definition;
 
     if (node.type !== 'image' && node.type !== 'link') {
       return;
@@ -72,17 +69,21 @@ function factory(definitions, existing) {
         identifier = String(++id);
       } while (existing.indexOf(identifier) !== -1);
 
-      titles[title] = {
+      definition = {
         type: 'definition',
         identifier: identifier,
         title: title,
         url: url
       };
+
+      titles[title] = definition;
+
+      root.children.push(definition);
     }
 
     replacement = {
       type: node.type + 'Reference',
-      identifier: id,
+      identifier: identifier,
       referenceType: 'full'
     };
 

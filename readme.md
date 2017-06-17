@@ -13,23 +13,32 @@ npm install remark-reference-links
 
 ## Usage
 
-```javascript
-var remark = require('remark');
-var referenceLinks = require('remark-reference-links');
+Say we have the following file, `example.md`:
 
-var file = remark().use(referenceLinks).processSync([
-  '[foo](http://example.com "Example Domain"), [foo](http://example.com "Example Domain"), [bar](http://example.com "Example Domain").',
-  '',
-  '![foo](http://example.com "Example Domain"), ![foo](http://example.com "Example Domain"), ![bar](http://example.com "Example Domain").',
-  ''
-].join('\n'));
+```markdown
+[foo](http://example.com "Example Domain"), [foo](http://example.com "Example Domain"), [bar](http://example.com "Example Domain").
 
-console.log(String(file));
+![foo](http://example.com "Example Domain"), ![foo](http://example.com "Example Domain"), ![bar](http://example.com "Example Domain").
 ```
 
-Yields:
+And our script, `example.js`, looks as follows:
 
-```md
+```javascript
+var fs = require('fs');
+var remark = require('remark');
+var links = require('remark-reference-links');
+
+remark()
+  .use(links)
+  .process(fs.readFileSync('example.md'), function (err, file) {
+    if (err) throw err;
+    console.log(String(file));
+  });
+```
+
+Now, running `node example` yields:
+
+```markdown
 [foo][1], [foo][1], [bar][1].
 
 ![foo][1], ![foo][1], ![bar][1].
@@ -47,11 +56,10 @@ Transform links and images into references and definitions.
 
 *   [`wooorm/remark-inline-links`](https://github.com/wooorm/remark-inline-links)
     — Reverse, thus rewriting references and definitions into normal links
-      and images;
+    and images
 *   [`eush77/remark-defsplit`](https://github.com/eush77/remark-defsplit)
     — Reverse, thus rewriting references and definitions into normal links
-      and images, but with URI-based identifiers instead of
-      numerical ones.
+    and images, but with URI-based identifiers instead of numerical ones
 
 ## License
 

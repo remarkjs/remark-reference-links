@@ -12,7 +12,6 @@
     "remark"
   ],
   "dependencies": {
-    "has": "^1.0.1",
     "unist-util-visit": "^1.0.0"
   },
   "repository": "https://github.com/wooorm/remark-reference-links.git",

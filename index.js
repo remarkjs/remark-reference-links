@@ -1,9 +1,10 @@
 'use strict';
 
-var has = require('has');
 var visit = require('unist-util-visit');
 
 module.exports = referenceLinks;
+
+var own = {}.hasOwnProperty;
 
 function referenceLinks() {
   return transformer;
@@ -26,7 +27,7 @@ function find(definitions, existing) {
 
     existing.push(node.identifier);
 
-    if (!has(definitions, url)) {
+    if (!own.call(definitions, url)) {
       definitions[url] = {};
     }
 
@@ -55,14 +56,14 @@ function factory(root, definitions, existing) {
       return;
     }
 
-    if (has(definitions, url)) {
+    if (own.call(definitions, url)) {
       titles = definitions[url];
     } else {
       titles = {};
       definitions[url] = titles;
     }
 
-    if (has(titles, title)) {
+    if (own.call(titles, title)) {
       identifier = titles[title].identifier;
     } else {
       do {

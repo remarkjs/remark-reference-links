@@ -11,10 +11,7 @@
     "definition",
     "remark"
   ],
-  "dependencies": {
-    "unist-util-visit": "^1.0.0"
-  },
-  "repository": "https://github.com/wooorm/remark-reference-links.git",
+  "repository": "wooorm/remark-reference-links",
   "bugs": "https://github.com/wooorm/remark-reference-links/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
@@ -24,6 +21,9 @@
   "files": [
     "index.js"
   ],
+  "dependencies": {
+    "unist-util-visit": "^1.0.0"
+  },
   "devDependencies": {
     "browserify": "^14.0.0",
     "esmangle": "^1.0.0",
@@ -40,7 +40,7 @@
     "build-mangle": "esmangle remark-reference-links.js > remark-reference-links.min.js",
     "build": "npm run build-md && npm run build-bundle && npm run build-mangle",
     "lint": "xo",
-    "test-api": "node test.js",
+    "test-api": "node test",
     "test-coverage": "nyc --reporter lcov tape test.js",
     "test": "npm run build && npm run lint && npm run test-coverage"
   },

@@ -61,6 +61,13 @@ Transform links and images into references and definitions.
     — Reverse, thus rewriting references and definitions into normal links
     and images, but with URI-based identifiers instead of numerical ones
 
+## Contribute
+
+See [`contribute.md` in `remarkjs/remarkj`][contribute] for ways to get started.
+
+This organisation has a [Code of Conduct][coc].  By interacting with this
+repository, organisation, or community you agree to abide by its terms.
+
 ## License
 
 [MIT][license] © [Titus Wormer][author]
@@ -86,3 +93,7 @@ Transform links and images into references and definitions.
 [npm]: https://docs.npmjs.com/cli/install
 
 [remark]: https://github.com/remarkjs/remark
+
+[contribute]: https://github.com/remarkjs/remark/blob/master/contributing.md
+
+[coc]: https://github.com/remarkjs/remark/blob/master/code-of-conduct.md

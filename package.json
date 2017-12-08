@@ -11,8 +11,8 @@
     "definition",
     "remark"
   ],
-  "repository": "wooorm/remark-reference-links",
-  "bugs": "https://github.com/wooorm/remark-reference-links/issues",
+  "repository": "remarkjs/remark-reference-links",
+  "bugs": "https://github.com/remarkjs/remark-reference-links/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",

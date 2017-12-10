@@ -1,7 +1,7 @@
 # remark-reference-links [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status] [![Chat][chat-badge]][chat]
 
-[**remark**][remark] plug-in to transform links and images into
-references and definitions.
+[**remark**][remark] plugin to transform links and images into references and
+definitions.
 
 ## Installation
 
@@ -54,16 +54,21 @@ Transform links and images into references and definitions.
 
 ## Related
 
-*   [`remarkjs/remark-inline-links`](https://github.com/remarkjs/remark-inline-links)
-    — Reverse, thus rewriting references and definitions into normal links
-    and images
-*   [`eush77/remark-defsplit`](https://github.com/eush77/remark-defsplit)
-    — Reverse, thus rewriting references and definitions into normal links
-    and images, but with URI-based identifiers instead of numerical ones
+*   [`remark-bookmarks`](https://github.com/ben-eb/remark-bookmarks)
+    — Link manager
+*   [`remark-inline-links`](https://github.com/remarkjs/remark-inline-links)
+    — Reverse of `remark-reference-links`, thus rewriting references and
+    definitions into normal links and images
+*   [`remark-defsplit`](https://github.com/eush77/remark-defsplit)
+    — Practically the same as `remark-inline-links`, but with URI-based
+    identifiers instead of numerical ones
+*   [`remark-unlink`](https://github.com/eush77/remark-unlink)
+    — Remove all links, references and definitions
 
 ## Contribute
 
-See [`contribute.md` in `remarkjs/remarkj`][contribute] for ways to get started.
+See [`contribute.md` in `remarkjs/remarkjs`][contribute] for ways to get
+started.
 
 This organisation has a [Code of Conduct][coc].  By interacting with this
 repository, organisation, or community you agree to abide by its terms.

@@ -94,6 +94,6 @@ function factory(root, definitions, existing) {
       replacement.children = node.children;
     }
 
-    parent.children.splice(index, 1, replacement);
+    parent.children[index] = replacement;
   }
 }

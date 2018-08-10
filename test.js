@@ -111,6 +111,31 @@ test('should support same URLs with different titles', function(t) {
   t.end()
 })
 
+test('should not reuse the same url as a definition if it has a different title', function(t) {
+  var input = [
+    '[This](alpha.com "alpha").\n\n',
+    '[1]: alpha.com "bravo"\n\n',
+    '[2]: alpha.com "charlie"\n'
+  ].join('')
+
+  var expected = [
+    '[This][3].\n\n',
+    '[1]: alpha.com "bravo"\n\n',
+    '[2]: alpha.com "charlie"\n\n',
+    '[3]: alpha.com "alpha"\n'
+  ].join('')
+
+  t.equal(
+    remark()
+      .use(referenceLinks)
+      .processSync(input)
+      .toString(),
+    expected
+  )
+
+  t.end()
+})
+
 test('should use existing definitions if they exist', function(t) {
   var input = [
     '[This](alpha.com "alpha").\n\n',

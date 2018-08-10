@@ -5,179 +5,138 @@ var remark = require('remark')
 var referenceLinks = require('.')
 
 test('remark-reference-links', function(t) {
-  remark()
-    .use(referenceLinks)
-    .process(
-      [
-        '[foo](http://example.com "Example Domain"), ' +
-          '[foo](http://example.com "Example Domain"), ' +
-          '[bar](http://example.com "Example Domain").',
-        '',
-        '![foo](http://example.com "Example Domain"), ' +
-          '![foo](http://example.com "Example Domain"), ' +
-          '![bar](http://example.com "Example Domain").',
-        ''
-      ].join('\n'),
-      function(err, file) {
-        t.ifErr(err)
+  var input = [
+    '[foo](http://example.com "Example Domain"), ',
+    '[foo](http://example.com "Example Domain"), ',
+    '[bar](http://example.com "Example Domain").',
+    '\n',
+    '![foo](http://example.com "Example Domain"), ',
+    '![foo](http://example.com "Example Domain"), ',
+    '![bar](http://example.com "Example Domain").',
+    '\n'
+  ].join('')
 
-        t.equal(
-          String(file),
-          [
-            '[foo][1], [foo][1], [bar][1].',
-            '',
-            '![foo][1], ![foo][1], ![bar][1].',
-            '',
-            '[1]: http://example.com "Example Domain"',
-            ''
-          ].join('\n')
-        )
+  var expected = [
+    '[foo][1], [foo][1], [bar][1].\n',
+    '![foo][1], ![foo][1], ![bar][1].\n\n',
+    '[1]: http://example.com "Example Domain"\n'
+  ].join('')
 
-        t.end()
-      }
-    )
+  t.equal(
+    remark()
+      .use(referenceLinks)
+      .processSync(input)
+      .toString(),
+    expected
+  )
+
+  t.end()
 })
 
-test("reference links are numbered in order they're seen", function(t) {
-  remark()
-    .use(referenceLinks)
-    .process(
-      [
-        '[foo](http://example.com/1 "Example Domain 1") ' +
-          '![foo](http://example.com/2 "Example Domain 2")',
-        ''
-      ].join('\n'),
-      function(err, file) {
-        t.ifErr(err)
+test('reference links are numbered in order they’re seen', function(t) {
+  var input = [
+    '[foo](http://example.com/1 "Example Domain 1") ',
+    '![foo](http://example.com/2 "Example Domain 2")',
+    '\n'
+  ].join('')
 
-        t.equal(
-          String(file),
-          [
-            '[foo][1] ![foo][2]',
-            '',
-            '[1]: http://example.com/1 "Example Domain 1"',
-            '',
-            '[2]: http://example.com/2 "Example Domain 2"',
-            ''
-          ].join('\n')
-        )
+  var expected = [
+    '[foo][1] ![foo][2]\n\n',
+    '[1]: http://example.com/1 "Example Domain 1"\n\n',
+    '[2]: http://example.com/2 "Example Domain 2"\n'
+  ].join('')
 
-        t.end()
-      }
-    )
+  t.equal(
+    remark()
+      .use(referenceLinks)
+      .processSync(input)
+      .toString(),
+    expected
+  )
+
+  t.end()
 })
 
 test('reference links don’t coalesce with existing identifiers', function(t) {
-  remark()
-    .use(referenceLinks)
-    .process(
-      [
-        '# Hello!',
-        '',
-        'This is a [thing][1] and [that](bravo.com) is a [thing][3]',
-        'and [stuff](delta.com)',
-        '',
-        '[1]: alpha.com',
-        '',
-        '[3]: charlie.com',
-        ''
-      ].join('\n'),
-      function(err, file) {
-        t.ifErr(err)
+  var input = [
+    '# Hello!\n\n',
+    'This is a [thing][1] and [that](bravo.com) is a [thing][3]\n',
+    'and [stuff](delta.com)\n\n',
+    '[1]: alpha.com\n\n',
+    '[3]: charlie.com\n'
+  ].join('')
 
-        t.equal(
-          String(file),
-          [
-            '# Hello!',
-            '',
-            'This is a [thing][1] and [that][2] is a [thing][3]',
-            'and [stuff][4]',
-            '',
-            '[1]: alpha.com',
-            '',
-            '[3]: charlie.com',
-            '',
-            '[2]: bravo.com',
-            '',
-            '[4]: delta.com',
-            ''
-          ].join('\n')
-        )
+  var expected = [
+    '# Hello!\n\n',
+    'This is a [thing][1] and [that][2] is a [thing][3]\n',
+    'and [stuff][4]\n\n',
+    '[1]: alpha.com\n\n',
+    '[3]: charlie.com\n\n',
+    '[2]: bravo.com\n\n',
+    '[4]: delta.com\n'
+  ].join('')
 
-        t.end()
-      }
-    )
+  t.equal(
+    remark()
+      .use(referenceLinks)
+      .processSync(input)
+      .toString(),
+    expected
+  )
+
+  t.end()
 })
 
 test('should support same URLs with different titles', function(t) {
-  remark()
-    .use(referenceLinks)
-    .process(
-      ['[This](alpha.com "alpha").', '', '[That](alpha.com "bravo").', ''].join(
-        '\n'
-      ),
-      function(err, file) {
-        t.ifErr(err)
+  var input = [
+    '[This](alpha.com "alpha").\n\n',
+    '[That](alpha.com "bravo").\n'
+  ].join('')
 
-        t.equal(
-          String(file),
-          [
-            '[This][1].',
-            '',
-            '[That][2].',
-            '',
-            '[1]: alpha.com "alpha"',
-            '',
-            '[2]: alpha.com "bravo"',
-            ''
-          ].join('\n')
-        )
+  var expected = [
+    '[This][1].\n\n',
+    '[That][2].\n\n',
+    '[1]: alpha.com "alpha"\n\n',
+    '[2]: alpha.com "bravo"\n'
+  ].join('')
 
-        t.end()
-      }
-    )
+  t.equal(
+    remark()
+      .use(referenceLinks)
+      .processSync(input)
+      .toString(),
+    expected
+  )
+
+  t.end()
 })
 
 test('should use existing definitions if they exist', function(t) {
-  remark()
-    .use(referenceLinks)
-    .process(
-      [
-        '[This](alpha.com "alpha").',
-        '',
-        '[That](alpha.com).',
-        '',
-        '[Thut](bravo.com "charlie").',
-        '',
-        '[this]: alpha.com "alpha"',
-        '',
-        '[thut]: bravo.com "delta"',
-        ''
-      ].join('\n'),
-      function(err, file) {
-        t.ifErr(err)
+  var input = [
+    '[This](alpha.com "alpha").\n\n',
+    '[That](alpha.com).\n\n',
+    '[Thut](bravo.com "charlie").\n\n',
+    '[this]: alpha.com "alpha"\n\n',
+    '[thut]: bravo.com "delta"\n'
+  ].join('')
 
-        t.equal(
-          String(file),
-          [
-            '[This][this].',
-            '',
-            '[That][1].',
-            '',
-            '[Thut][2].',
-            '',
-            '[this]: alpha.com "alpha"',
-            '',
-            '[thut]: bravo.com "delta"',
-            '',
-            '[1]: alpha.com',
-            '',
-            '[2]: bravo.com "charlie"',
-            ''
-          ].join('\n')
-        )
+  var expected = [
+    '[This][this].\n\n',
+    '[That][1].\n\n',
+    '[Thut][2].\n\n',
+    '[this]: alpha.com "alpha"\n\n',
+    '[thut]: bravo.com "delta"\n\n',
+    '[1]: alpha.com\n\n',
+    '[2]: bravo.com "charlie"\n'
+  ].join('')
 
-        t.end()
-      }
-    )
+  t.equal(
+    remark()
+      .use(referenceLinks)
+      .processSync(input)
+      .toString(),
+    expected
+  )
+
+  t.end()
 })

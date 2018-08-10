@@ -2,7 +2,7 @@
 
 var test = require('tape');
 var remark = require('remark');
-var referenceLinks = require('./index.js');
+var referenceLinks = require('.');
 
 test('remark-reference-links', function (t) {
   remark().use(referenceLinks).process([

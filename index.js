@@ -15,7 +15,7 @@ function transformer(node) {
   var existing = []
 
   visit(node, 'definition', find(definitions, existing))
-  visit(node, factory(node, definitions, existing))
+  visit(node, ['image', 'link'], factory(node, definitions, existing))
 }
 
 /* Find existing definitions. */
@@ -51,10 +51,6 @@ function factory(root, definitions, existing) {
     var identifier
     var titles
     var definition
-
-    if (node.type !== 'image' && node.type !== 'link') {
-      return
-    }
 
     if (own.call(definitions, url)) {
       titles = definitions[url]

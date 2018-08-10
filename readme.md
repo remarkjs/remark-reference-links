@@ -67,7 +67,7 @@ Transform links and images into references and definitions.
 
 ## Contribute
 
-See [`contribute.md` in `remarkjs/remarkjs`][contribute] for ways to get
+See [`contributing.md` in `remarkjs/remark`][contributing] for ways to get
 started.
 
 This organisation has a [Code of Conduct][coc].  By interacting with this
@@ -99,6 +99,6 @@ repository, organisation, or community you agree to abide by its terms.
 
 [remark]: https://github.com/remarkjs/remark
 
-[contribute]: https://github.com/remarkjs/remark/blob/master/contributing.md
+[contributing]: https://github.com/remarkjs/remark/blob/master/contributing.md
 
 [coc]: https://github.com/remarkjs/remark/blob/master/code-of-conduct.md

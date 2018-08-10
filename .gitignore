@@ -5,3 +5,4 @@ coverage/
 node_modules/
 remark-reference-links.js
 remark-reference-links.min.js
+yarn.lock

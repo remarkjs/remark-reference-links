@@ -18,7 +18,7 @@ function transformer(node) {
   visit(node, ['image', 'link'], factory(node, definitions, existing))
 }
 
-/* Find existing definitions. */
+// Find existing definitions.
 function find(definitions, existing) {
   return one
 
@@ -35,15 +35,14 @@ function find(definitions, existing) {
   }
 }
 
-/* Transform normal links and images into references and definitions,
- * replaces the current node, and adds a definition if needed. */
+// Transform normal links and images into references and definitions, replaces
+// the current node, and adds a definition if needed.
 function factory(root, definitions, existing) {
   var id = 0
 
   return one
 
-  /* Transform a normal link/image based on bound
-   * `definitions`. */
+  // Transform a normal link/image based on bound `definitions`.
   function one(node, index, parent) {
     var url = node.url
     var title = node.title

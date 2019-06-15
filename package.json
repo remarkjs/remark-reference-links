@@ -1,15 +1,18 @@
 {
   "name": "remark-reference-links",
   "version": "4.0.3",
-  "description": "Transform links and images into references and definitions",
+  "description": "remark plugin to transform links and images to references and definitions",
   "license": "MIT",
   "keywords": [
+    "unified",
+    "remark",
+    "plugin",
+    "mdast",
+    "markdown",
     "link",
     "image",
-    "to",
     "reference",
-    "definition",
-    "remark"
+    "definition"
   ],
   "repository": "remarkjs/remark-reference-links",
   "bugs": "https://github.com/remarkjs/remark-reference-links/issues",

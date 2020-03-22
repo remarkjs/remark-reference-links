@@ -4,7 +4,7 @@ var test = require('tape')
 var remark = require('remark')
 var referenceLinks = require('.')
 
-test('referenceLinks', function(t) {
+test('referenceLinks', function (t) {
   t.equal(
     remark()
       .use(referenceLinks)

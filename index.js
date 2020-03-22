@@ -10,19 +10,16 @@ function referenceLinks() {
   return transformer
 }
 
-function transformer(node) {
+function transformer(tree) {
+  var id = 0
   var definitions = {}
   var existing = []
 
-  visit(node, 'definition', find(definitions, existing))
-  visit(node, ['image', 'link'], factory(node, definitions, existing))
-}
+  visit(tree, 'definition', find)
+  visit(tree, ['image', 'link'], replace)
 
-// Find existing definitions.
-function find(definitions, existing) {
-  return one
-
-  function one(node) {
+  // Find existing definitions.
+  function find(node) {
     var url = node.url
 
     existing.push(node.identifier)
@@ -33,17 +30,10 @@ function find(definitions, existing) {
 
     definitions[url][node.title] = node
   }
-}
 
-// Transform normal links and images into references and definitions, replaces
-// the current node, and adds a definition if needed.
-function factory(root, definitions, existing) {
-  var id = 0
-
-  return one
-
-  // Transform a normal link/image based on bound `definitions`.
-  function one(node, index, parent) {
+  // Transform normal links and images into references and definitions, replaces
+  // the current node, and adds a definition if needed.
+  function replace(node, index, parent) {
     var url = node.url
     var title = node.title
     var replacement
@@ -74,7 +64,7 @@ function factory(root, definitions, existing) {
 
       titles[title] = definition
 
-      root.children.push(definition)
+      tree.children.push(definition)
     }
 
     replacement = {
@@ -90,5 +80,6 @@ function factory(root, definitions, existing) {
     }
 
     parent.children[index] = replacement
+    return [visit.SKIP, index]
   }
 }

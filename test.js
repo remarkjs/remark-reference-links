@@ -2,7 +2,7 @@ import test from 'tape'
 import {remark} from 'remark'
 import referenceLinks from './index.js'
 
-test('referenceLinks', function (t) {
+test('referenceLinks', (t) => {
   t.equal(
     remark()
       .use(referenceLinks)

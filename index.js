@@ -1,81 +1,69 @@
 import {visit, SKIP} from 'unist-util-visit'
 
-var own = {}.hasOwnProperty
+const own = {}.hasOwnProperty
 
 export default function remarkReferenceLinks() {
   return transformer
 }
 
 function transformer(tree) {
-  var id = 0
-  var definitions = {}
-  var existing = []
-
-  visit(tree, 'definition', find)
-  visit(tree, ['image', 'link'], replace)
+  let id = 0
+  const definitions = Object.create(null)
+  const existing = []
 
   // Find existing definitions.
-  function find(node) {
-    var url = node.url
+  visit(tree, 'definition', (node) => {
+    const url = node.url
 
     existing.push(node.identifier)
 
     if (!own.call(definitions, url)) {
-      definitions[url] = {}
+      definitions[url] = Object.create(null)
     }
 
     definitions[url][node.title] = node
-  }
+  })
 
   // Transform normal links and images into references and definitions, replaces
   // the current node, and adds a definition if needed.
-  function replace(node, index, parent) {
-    var url = node.url
-    var title = node.title
-    var replacement
-    var identifier
-    var titles
-    var definition
-
-    if (own.call(definitions, url)) {
-      titles = definitions[url]
-    } else {
-      titles = {}
-      definitions[url] = titles
-    }
+  visit(tree, ['image', 'link'], (node, index, parent) => {
+    const url = node.url
+    const title = node.title
+    const titles = own.call(definitions, url)
+      ? definitions[url]
+      : (definitions[url] = Object.create(null))
+    let identifier
 
     if (own.call(titles, title)) {
       identifier = titles[title].identifier
     } else {
       do {
         identifier = String(++id)
-      } while (existing.indexOf(identifier) !== -1)
+      } while (existing.includes(identifier))
 
-      definition = {
-        type: 'definition',
-        identifier: identifier,
-        title: title,
-        url: url
-      }
+      const definition = {type: 'definition', identifier, title, url}
 
       titles[title] = definition
 
       tree.children.push(definition)
     }
 
-    replacement = {
-      type: node.type + 'Reference',
-      identifier: identifier,
-      referenceType: 'full'
-    }
-
-    if (node.type === 'image') {
-      replacement.alt = node.alt
-    } else {
-      replacement.children = node.children
-    }
+    const replacement =
+      node.type === 'image'
+        ? {
+            type: 'imageReference',
+            identifier,
+            referenceType: 'full',
+            alt: node.alt
+          }
+        : {
+            type: 'linkReference',
+            identifier,
+            referenceType: 'full',
+            children: node.children
+          }
 
     parent.children[index] = replacement
     return [SKIP, index]
-  }
+  })
 }

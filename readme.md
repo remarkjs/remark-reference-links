@@ -19,6 +19,9 @@ No change is needed: it works exactly the same now as it did before!
 
 ## Install
 
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
+Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -35,17 +38,19 @@ Say we have the following file, `example.md`:
 ![foo](http://example.com "Example Domain"), ![foo](http://example.com "Example Domain"), ![bar](http://example.com "Example Domain").
 ```
 
-And our script, `example.js`, looks as follows:
+And our module, `example.js`, looks as follows:
 
 ```js
-var fs = require('fs')
-var remark = require('remark')
-var links = require('remark-reference-links')
+import fs from 'node:fs'
+import {remark} from 'remark'
+import remarkReferenceLinks from 'remark-reference-links'
+
+const buf = fs.readFileSync('example.md')
 
 remark()
-  .use(links)
-  .process(fs.readFileSync('example.md'), function(err, file) {
-    if (err) throw err
+  .use(remarkReferenceLinks)
+  .process(buf)
+  .then((file) => {
     console.log(String(file))
   })
 ```
@@ -62,7 +67,10 @@ Now, running `node example` yields:
 
 ## API
 
-### `remark().use(referenceLinks)`
+This package exports no identifiers.
+The default export is `remarkReferenceLinks`.
+
+### `unified().use(remarkReferenceLinks)`
 
 Plugin to transform links and images into references and definitions.
 

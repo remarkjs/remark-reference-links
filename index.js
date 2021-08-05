@@ -1,4 +1,4 @@
-import visit from 'unist-util-visit'
+import {visit, SKIP} from 'unist-util-visit'
 
 var own = {}.hasOwnProperty
 
@@ -76,6 +76,6 @@ function transformer(tree) {
     }
 
     parent.children[index] = replacement
-    return [visit.SKIP, index]
+    return [SKIP, index]
   }
 }

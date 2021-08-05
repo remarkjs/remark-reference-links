@@ -26,6 +26,9 @@
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
     "An Ko <an@cyan.io>"
   ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.js",
   "files": [
     "index.js"
   ],
@@ -59,6 +62,8 @@
     "prettier": true,
     "esnext": false,
     "rules": {
+      "no-var": "off",
+      "prefer-arrow-callback": "off",
       "unicorn/prefer-includes": "off",
       "guard-for-in": "off"
     }

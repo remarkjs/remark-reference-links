@@ -1,12 +1,8 @@
-'use strict'
-
-var visit = require('unist-util-visit')
-
-module.exports = referenceLinks
+import visit from 'unist-util-visit'
 
 var own = {}.hasOwnProperty
 
-function referenceLinks() {
+export default function remarkReferenceLinks() {
   return transformer
 }
 

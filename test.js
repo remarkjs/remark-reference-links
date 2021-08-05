@@ -1,8 +1,6 @@
-'use strict'
-
-var test = require('tape')
-var remark = require('remark')
-var referenceLinks = require('.')
+import test from 'tape'
+import remark from 'remark'
+import referenceLinks from './index.js'
 
 test('referenceLinks', function (t) {
   t.equal(

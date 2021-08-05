@@ -1,6 +1,6 @@
 {
   "name": "remark-reference-links",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "description": "remark plugin to transform links and images to references and definitions",
   "license": "MIT",
   "keywords": [

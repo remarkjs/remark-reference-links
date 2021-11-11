@@ -8,62 +8,128 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-[**remark**][remark] plugin to transform links and images into references and
+**[remark][]** plugin to change links and images to references with separate
 definitions.
 
-## Note!
+## Contents
 
-This plugin is ready for the new parser in remark
-([`remarkjs/remark#536`](https://github.com/remarkjs/remark/pull/536)).
-No change is needed: it works exactly the same now as it did before!
+*   [What is this?](#what-is-this)
+*   [When should I use this?](#when-should-i-use-this)
+*   [Install](#install)
+*   [Use](#use)
+*   [API](#api)
+    *   [`unified().use(remarkReferenceLinks)`](#unifieduseremarkreferencelinks)
+*   [Types](#types)
+*   [Compatibility](#compatibility)
+*   [Security](#security)
+*   [Related](#related)
+*   [Contribute](#contribute)
+*   [License](#license)
+
+## What is this?
+
+This package is a [unified][] ([remark][]) plugin to turn links (`[text](url)`)
+and images (`![alt](url)`) into references (`[text][id]`, `![alt][id]`) and
+definitions (`[id]: url`).
+
+**unified** is a project that transforms content with abstract syntax trees
+(ASTs).
+**remark** adds support for markdown to unified.
+**mdast** is the markdown AST that remark uses.
+This is a remark plugin that transforms mdast.
+
+## When should I use this?
+
+This project is useful when you want to transform markdown and prefer that it
+uses references and definitions.
+Long URLs in source code can make reading markdown difficult.
+References and definitions improve that by moving those URLs into definitions,
+outside of paragraphs.
+
+This plugin is very similar to the alternative
+[`remark-defsplit`][remark-defsplit].
+The difference is that that plugin generates identifiers based on hostnames of
+URLs and places definitions at the end of each section, whereas this plugin
+generates numeric identifiers at the end of the document.
+
+A different plugin, [`remark-inline-links`][remark-inline-links], does the
+inverse: turn references and definitions into links and images.
 
 ## Install
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
-Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
-
-[npm][]:
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
+In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 
 ```sh
 npm install remark-reference-links
 ```
 
-## Use
-
-Say we have the following file, `example.md`:
-
-```markdown
-[foo](http://example.com "Example Domain"), [foo](http://example.com "Example Domain"), [bar](http://example.com "Example Domain").
-
-![foo](http://example.com "Example Domain"), ![foo](http://example.com "Example Domain"), ![bar](http://example.com "Example Domain").
-```
-
-And our module, `example.js`, looks as follows:
+In Deno with [Skypack][]:
 
 ```js
-import fs from 'node:fs'
+import remarkReferenceLinks from 'https://cdn.skypack.dev/remark-reference-links@6?dts'
+```
+
+In browsers with [Skypack][]:
+
+```html
+<script type="module">
+  import remarkReferenceLinks from 'https://cdn.skypack.dev/remark-reference-links@6?min'
+</script>
+```
+
+## Use
+
+Say we have the following file `example.md`:
+
+```markdown
+# Some project
+
+[![Build](https://github.com/remarkjs/remark-defsplit/workflows/main/badge.svg)](https://github.com/remarkjs/remark-defsplit/actions)
+
+## Section
+
+[A link](https://example.com)
+```
+
+And our module `example.js` looks as follows:
+
+```js
+import {read} from 'to-vfile'
 import {remark} from 'remark'
 import remarkReferenceLinks from 'remark-reference-links'
 
-const buf = fs.readFileSync('example.md')
+main()
 
-remark()
-  .use(remarkReferenceLinks)
-  .process(buf)
-  .then((file) => {
-    console.log(String(file))
-  })
+async function main() {
+  const file = await remark()
+    .use(remarkReferenceLinks)
+    .process(await read('example.md'))
+
+  console.log(String(file))
+}
 ```
 
-Now, running `node example` yields:
+Now running `node example.js` yields:
 
 ```markdown
-[foo][1], [foo][1], [bar][1].
+# Some project
 
-![foo][1], ![foo][1], ![bar][1].
+[![Build][2]][1]
 
-[1]: http://example.com "Example Domain"
+## Section
+
+[A link][3]
+
+[1]: https://github.com/remarkjs/remark-defsplit/actions
+
+[2]: https://github.com/remarkjs/remark-defsplit/workflows/main/badge.svg
+
+[3]: https://example.com
 ```
+
+> 👉 **Note**: Observe that definitions are added at the end of the document and
+> that IDs are numeric identifiers.
 
 ## API
 
@@ -72,24 +138,36 @@ The default export is `remarkReferenceLinks`.
 
 ### `unified().use(remarkReferenceLinks)`
 
-Plugin to transform links and images into references and definitions.
+Plugin to change links and images to references with separate definitions.
+There are no options.
+
+## Types
+
+This package is fully typed with [TypeScript][].
+There are no extra exported types.
+
+## Compatibility
+
+Projects maintained by the unified collective are compatible with all maintained
+versions of Node.js.
+As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
+Our projects sometimes work with older versions, but this is not guaranteed.
+
+This plugin works with `unified` version 3+ and `remark` version 4+.
 
 ## Security
 
-Use of `remark-reference-links` does not involve [**rehype**][rehype]
-([**hast**][hast]) or user content so there are no openings for
-[cross-site scripting (XSS)][xss] attacks.
+Use of `remark-reference-links` does not involve **[rehype][]** (**[hast][]**)
+or user content so there are no openings for [cross-site scripting (XSS)][xss]
+attacks.
 
 ## Related
 
-*   [`remark-inline-links`](https://github.com/remarkjs/remark-inline-links)
-    — Reverse of `remark-reference-links`, thus rewriting references and
-    definitions into normal links and images
-*   [`remark-defsplit`](https://github.com/eush77/remark-defsplit)
-    — Practically the same as `remark-inline-links`, but with URI-based
-    identifiers instead of numerical ones
-*   [`remark-unlink`](https://github.com/eush77/remark-unlink)
-    — Remove all links, references and definitions
+*   [`remark-defsplit`][remark-defsplit]
+    — transform links and images into references and definitions with numeric
+    IDs
+*   [`remark-inline-links`][remark-inline-links]
+    — transform references and definitions into normal links and images
 
 ## Contribute
 
@@ -135,6 +213,8 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
+[skypack]: https://www.skypack.dev
+
 [health]: https://github.com/remarkjs/.github
 
 [contributing]: https://github.com/remarkjs/.github/blob/HEAD/contributing.md
@@ -149,8 +229,16 @@ abide by its terms.
 
 [remark]: https://github.com/remarkjs/remark
 
+[unified]: https://github.com/unifiedjs/unified
+
 [xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+
+[typescript]: https://www.typescriptlang.org
 
 [rehype]: https://github.com/rehypejs/rehype
 
 [hast]: https://github.com/syntax-tree/hast
+
+[remark-defsplit]: https://github.com/remarkjs/remark-defsplit
+
+[remark-inline-links]: https://github.com/remarkjs/remark-inline-links

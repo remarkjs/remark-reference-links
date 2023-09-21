@@ -1,14 +1,20 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {remark} from 'remark'
-import referenceLinks from './index.js'
+import remarkReferenceLinks from './index.js'
 
-test('referenceLinks', async function (t) {
+test('remarkReferenceLinks', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(Object.keys(await import('./index.js')).sort(), [
+      'default'
+    ])
+  })
+
   await t.test('should work', async function () {
     assert.equal(
       String(
         await remark()
-          .use(referenceLinks)
+          .use(remarkReferenceLinks)
           .process(
             [
               '[foo](http://example.com "Example Domain"), [foo](http://example.com "Example Domain"), [bar](http://example.com "Example Domain").',
@@ -32,7 +38,7 @@ test('referenceLinks', async function (t) {
       assert.equal(
         String(
           await remark()
-            .use(referenceLinks)
+            .use(remarkReferenceLinks)
             .process(
               '[foo](http://example.com/1 "Example Domain 1") ![foo](http://example.com/2 "Example Domain 2")'
             )
@@ -55,7 +61,7 @@ test('referenceLinks', async function (t) {
       assert.equal(
         String(
           await remark()
-            .use(referenceLinks)
+            .use(remarkReferenceLinks)
             .process(
               [
                 '# Hello!',
@@ -92,7 +98,7 @@ test('referenceLinks', async function (t) {
       assert.equal(
         String(
           await remark()
-            .use(referenceLinks)
+            .use(remarkReferenceLinks)
             .process('[This](alpha.com "alpha").\n\n[That](alpha.com "bravo").')
         ),
         [
@@ -115,7 +121,7 @@ test('referenceLinks', async function (t) {
       assert.equal(
         String(
           await remark()
-            .use(referenceLinks)
+            .use(remarkReferenceLinks)
             .process(
               [
                 '[This](alpha.com "alpha").',
@@ -145,7 +151,7 @@ test('referenceLinks', async function (t) {
       assert.equal(
         String(
           await remark()
-            .use(referenceLinks)
+            .use(remarkReferenceLinks)
             .process(
               [
                 '[This](alpha.com "alpha").',

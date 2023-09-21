@@ -32,12 +32,6 @@ This package is a [unified][] ([remark][]) plugin to turn links (`[text](url)`)
 and images (`![alt](url)`) into references (`[text][id]`, `![alt][id]`) and
 definitions (`[id]: url`).
 
-**unified** is a project that transforms content with abstract syntax trees
-(ASTs).
-**remark** adds support for markdown to unified.
-**mdast** is the markdown AST that remark uses.
-This is a remark plugin that transforms mdast.
-
 ## When should I use this?
 
 This project is useful when you want to transform markdown and prefer that it
@@ -57,8 +51,8 @@ inverse: turn references and definitions into links and images.
 
 ## Install
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
-In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
+This package is [ESM only][esm].
+In Node.js (version 16+), install with [npm][]:
 
 ```sh
 npm install remark-reference-links
@@ -83,83 +77,101 @@ In browsers with [`esm.sh`][esmsh]:
 Say we have the following file `example.md`:
 
 ```markdown
-# Some project
+# Pluto
 
-[![Build](https://github.com/remarkjs/remark-defsplit/workflows/main/badge.svg)](https://github.com/remarkjs/remark-defsplit/actions)
+[![Build](https://github.com/solar-system/pluto/workflows/main/badge.svg)](https://github.com/solar-system/pluto/actions)
 
-## Section
+## History
 
-[A link](https://example.com)
+In the 1840s,
+[Urbain Le Verrier](https://wikipedia.org/wiki/Urbain_Le_Verrier) used
+Newtonian mechanics to predict the position of the then-undiscovered planet
+[Neptune](https://wikipedia.org/wiki/Neptune) after analyzing perturbations
+in the orbit of [Uranus](https://wikipedia.org/wiki/Uranus).
 ```
 
 And our module `example.js` looks as follows:
 
 ```js
-import {read} from 'to-vfile'
 import {remark} from 'remark'
 import remarkReferenceLinks from 'remark-reference-links'
+import {read} from 'to-vfile'
 
-main()
+const file = await remark()
+  .use(remarkReferenceLinks)
+  .process(await read('example.md'))
 
-async function main() {
-  const file = await remark()
-    .use(remarkReferenceLinks)
-    .process(await read('example.md'))
-
-  console.log(String(file))
-}
+console.log(String(file))
 ```
 
-Now running `node example.js` yields:
+…then running `node example.js` yields:
 
 ```markdown
-# Some project
+# Pluto
 
 [![Build][2]][1]
 
-## Section
+## History
 
-[A link][3]
+In the 1840s,
+[Urbain Le Verrier][3] used
+Newtonian mechanics to predict the position of the then-undiscovered planet
+[Neptune][4] after analyzing perturbations
+in the orbit of [Uranus][5].
 
-[1]: https://github.com/remarkjs/remark-defsplit/actions
+[1]: https://github.com/solar-system/pluto/actions
 
-[2]: https://github.com/remarkjs/remark-defsplit/workflows/main/badge.svg
+[2]: https://github.com/solar-system/pluto/workflows/main/badge.svg
 
-[3]: https://example.com
+[3]: https://wikipedia.org/wiki/Urbain_Le_Verrier
+
+[4]: https://wikipedia.org/wiki/Neptune
+
+[5]: https://wikipedia.org/wiki/Uranus
 ```
 
-> 👉 **Note**: Observe that definitions are added at the end of the document and
+> 👉 **Note**: observe that definitions are added at the end of the document and
 > that IDs are numeric identifiers.
 
 ## API
 
 This package exports no identifiers.
-The default export is `remarkReferenceLinks`.
+The default export is [`remarkReferenceLinks`][api-remark-reference-links].
 
 ### `unified().use(remarkReferenceLinks)`
 
-Plugin to change links and images to references with separate definitions.
-There are no options.
+Change links and images to references with separate definitions.
+
+###### Parameters
+
+There are no parameters.
+
+###### Returns
+
+Transform ([`Transformer`][unified-transformer]).
 
 ## Types
 
 This package is fully typed with [TypeScript][].
-There are no extra exported types.
+It exports no additional options.
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
+
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line, `remark-reference-links@^6`,
+compatible with Node.js 12.
 
 This plugin works with `unified` version 3+ and `remark` version 4+.
 
 ## Security
 
 Use of `remark-reference-links` does not involve **[rehype][]** (**[hast][]**)
-or user content so there are no openings for [cross-site scripting (XSS)][xss]
-attacks.
+or user content so there are no openings for [cross-site scripting
+(XSS)][wiki-xss] attacks.
 
 ## Related
 
@@ -197,9 +209,9 @@ abide by its terms.
 
 [downloads]: https://www.npmjs.com/package/remark-reference-links
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/remark-reference-links.svg
+[size-badge]: https://img.shields.io/bundlejs/size/remark-reference-links
 
-[size]: https://bundlephobia.com/result?p=remark-reference-links
+[size]: https://bundlejs.com/?q=remark-reference-links
 
 [sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
 
@@ -212,6 +224,8 @@ abide by its terms.
 [chat]: https://github.com/remarkjs/remark/discussions
 
 [npm]: https://docs.npmjs.com/cli/install
+
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
 [esmsh]: https://esm.sh
 
@@ -227,18 +241,22 @@ abide by its terms.
 
 [author]: https://wooorm.com
 
-[remark]: https://github.com/remarkjs/remark
-
-[unified]: https://github.com/unifiedjs/unified
-
-[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
-
-[typescript]: https://www.typescriptlang.org
+[hast]: https://github.com/syntax-tree/hast
 
 [rehype]: https://github.com/rehypejs/rehype
 
-[hast]: https://github.com/syntax-tree/hast
+[remark]: https://github.com/remarkjs/remark
 
 [remark-defsplit]: https://github.com/remarkjs/remark-defsplit
 
 [remark-inline-links]: https://github.com/remarkjs/remark-inline-links
+
+[typescript]: https://www.typescriptlang.org
+
+[unified]: https://github.com/unifiedjs/unified
+
+[unified-transformer]: https://github.com/unifiedjs/unified#transformer
+
+[wiki-xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+
+[api-remark-reference-links]: #unifieduseremarkreferencelinks

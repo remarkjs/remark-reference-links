@@ -61,14 +61,14 @@ npm install remark-reference-links
 In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import remarkReferenceLinks from 'https://esm.sh/remark-reference-links@6'
+import remarkReferenceLinks from 'https://esm.sh/remark-reference-links@7'
 ```
 
 In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import remarkReferenceLinks from 'https://esm.sh/remark-reference-links@6?bundle'
+  import remarkReferenceLinks from 'https://esm.sh/remark-reference-links@7?bundle'
 </script>
 ```
 

@@ -1,13 +1,14 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {remark} from 'remark'
-import remarkReferenceLinks from './index.js'
+import remarkReferenceLinks from 'remark-reference-links'
 
 test('remarkReferenceLinks', async function (t) {
   await t.test('should expose the public api', async function () {
-    assert.deepEqual(Object.keys(await import('./index.js')).sort(), [
-      'default'
-    ])
+    assert.deepEqual(
+      Object.keys(await import('remark-reference-links')).sort(),
+      ['default']
+    )
   })
 
   await t.test('should work', async function () {
